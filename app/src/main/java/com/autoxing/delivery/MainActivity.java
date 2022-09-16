@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadWebView() {
         launcherView.setVisibility(View.VISIBLE);
+
+        //运行此项目 https://github.com/AutoxingTech/AX_SDK1.0_Example,
+        //之后 webView.loadUrl("https://xxxxx/sdk/v1.0/example");
+        //即可体验sdk功能
+        //file:///android_asset/dist/index.html 为android与js交互demo
         webView.loadUrl("file:///android_asset/dist/index.html");
     }
 
