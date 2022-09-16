@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+
+       function callJSHello(text){
+          document.getElementById("androidContent").innerHTML = "Android传入值："+text
+       }
+
+       function clickAndroidHello(){
+          //app来自： webView.addJavascriptInterface(MainActivity.this, "app");
+          let android_res = app.actionFromJsHello("你好")
+          document.getElementById("androidContent").innerHTML = android_res
+       }
+
+       function clickAndroidRefresh(){
+          app.actionFromJsWebRefresh()
+       }
+    </script>
+  </head>
+  <body>
+    <div style="margin-top:50px;font-weight:blood">Android WebView 交互Demo</div>
+    <div id="androidContent">
+    </div>
+    <button onclick="clickAndroidHello()" >调用Android代码</button>
+    <button onclick="clickAndroidRefresh()" >调用Android刷新webView</button>
+  </body>
+</html>
