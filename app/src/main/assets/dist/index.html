@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script>
 
-       function callJSHello(text){
-          document.getElementById("androidContent").innerHTML = "Android传入值："+text
-       }
+<head>
 
-       function clickAndroidHello(){
-          //app来自： webView.addJavascriptInterface(MainActivity.this, "app");
-          let android_res = app.actionFromJsHello("你好")
-          document.getElementById("androidContent").innerHTML = android_res
-       }
+  <script src=./autoxing-robot-js-sdk1.0.2.js></script>
+  <script>
 
-       function clickAndroidRefresh(){
-          app.actionFromJsWebRefresh()
-       }
-    </script>
-  </head>
-  <body>
-    <div style="margin-top:50px;font-weight:blood">Android WebView 交互Demo</div>
-    <div id="androidContent">
-    </div>
-    <button onclick="clickAndroidHello()" >调用Android代码</button>
-    <button onclick="clickAndroidRefresh()" >调用Android刷新webView</button>
-  </body>
+    const appId = "—————————————"
+    const appSecret = "——————————————————————————————"
+    const robotId = "xxxxxxxxxxx817"
+    let axRobot = new AXRobot(appId, appSecret, AppMode.WAN_APP);
+
+    function init() {
+      axRobot.init().then((isOk) => { //初始化
+        return axRobot.connectRobot({ //连接机器人
+          robotId: robotId
+        })
+      }).then((isOK) => {
+        return axRobot.getPoiList(); //拉去站点
+      }).then((res) => {
+        console.log(res)
+      }).catch((res) => {
+        console.log(res.errText)
+      })
+    }
+
+    function callJSHello(text) {
+      init()
+      document.getElementById("androidContent").innerHTML = "Android传入值：" + text
+    }
+
+    function clickAndroidHello() {
+      //app来自： webView.addJavascriptInterface(MainActivity.this, "app");
+      let android_res = app.actionFromJsHello("你好")
+      document.getElementById("androidContent").innerHTML = android_res
+    }
+
+    function clickAndroidRefresh() {
+      app.actionFromJsWebRefresh()
+    }
+  </script>
+</head>
+
+<body>
+  <div style="margin-top:50px;font-weight:blood">111Android WebView 交互Demo</div>
+  <div id="androidContent">
+  </div>
+  <button onclick="clickAndroidHello()">调用Android代码</button>
+  <button onclick="clickAndroidRefresh()">调用Android刷新webView</button>
+</body>
+
 </html>
