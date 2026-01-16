@@ -3,21 +3,26 @@
 
 <head>
 
-  <script src=./autoxing-robot-js-sdk1.0.81.js></script>
+  <script src=./axios.min.js></script>
+  <script src=./robot-js-sdk.js></script>
+
   <script>
 
     const appId = "—————————————"
     const appSecret = "——————————————————————————————"
     const robotId = "xxxxxxxxxxx817"
-    let axRobot = new AXRobot(appId, appSecret, AppMode.WAN_APP);
+	const AXRobot = AXRobotManage
+
+	var axRobot = new AXRobot({appId: appId, secret: appSecret, mode: AppMode.WAN_APP});
 
     function init() {
       axRobot.init().then((isOk) => { //初始化
         return axRobot.connectRobot({ //连接机器人
           robotId: robotId
         })
-      }).then((isOK) => {
-        return axRobot.getPoiList(); //拉去站点
+      }).then(async (isOK) => {
+        let a = await axRobot.getPoiList(); //拉去站点
+        alert(JSON.stringify(a))
       }).then((res) => {
         console.log(res)
       }).catch((res) => {
